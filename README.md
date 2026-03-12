@@ -108,23 +108,89 @@ Check if server and browser are running.
 curl -s "http://localhost:3456/health"
 ```
 
-## Claude Code Integration
+## Adding to Claude Code
 
-To use this as a Claude Code skill:
+There are two ways to add this skill to Claude Code:
 
-1. Copy `SKILL.md` to your Claude Code skills folder:
-   ```bash
-   mkdir -p ~/.claude/skills/fetch-rendered
-   cp SKILL.md ~/.claude/skills/fetch-rendered/SKILL.md
-   ```
+### Option 1: Global Skill (All Projects)
 
-2. Or add to a project:
-   ```bash
-   mkdir -p .claude/skills/fetch-rendered
-   cp SKILL.md .claude/skills/fetch-rendered/SKILL.md
-   ```
+Install the skill globally so it's available in every Claude Code session:
 
-3. Start the server before using Claude Code
+```bash
+# Create the global skills directory
+mkdir -p ~/.claude/skills/fetch-rendered
+
+# Clone this repository (or copy files)
+git clone https://github.com/YOUR_USERNAME/claude-code-playwright-skill.git /tmp/playwright-skill
+cp /tmp/playwright-skill/* ~/.claude/skills/fetch-rendered/
+cp /tmp/playwright-skill/SKILL.md ~/.claude/skills/fetch-rendered/SKILL.md
+
+# Install dependencies
+cd ~/.claude/skills/fetch-rendered
+npm install
+npx playwright install chromium
+```
+
+### Option 2: Project-Specific Skill
+
+Add the skill to a specific project:
+
+```bash
+# In your project directory
+mkdir -p .claude/skills/fetch-rendered
+
+# Clone or copy the skill files
+git clone https://github.com/YOUR_USERNAME/claude-code-playwright-skill.git /tmp/playwright-skill
+cp /tmp/playwright-skill/* .claude/skills/fetch-rendered/
+cp /tmp/playwright-skill/SKILL.md .claude/skills/fetch-rendered/SKILL.md
+
+# Install dependencies
+cd .claude/skills/fetch-rendered
+npm install
+npx playwright install chromium
+```
+
+### Starting the Server
+
+Before using the skill in Claude Code, start the Playwright server:
+
+```bash
+# In the skill directory
+cd ~/.claude/skills/fetch-rendered  # or your project path
+npm start
+
+# Or use the one-liner (starts server, runs request, stops server)
+npm start && sleep 3 && curl -s "http://localhost:3456/render?url=https://example.com&waitTime=3000"
+```
+
+### Using the Skill in Claude Code
+
+Once the server is running, you can ask Claude Code to fetch JavaScript-rendered pages:
+
+- "Fetch the JavaScript-rendered content from [URL]"
+- "Use the fetch-rendered skill to get content from [URL]"
+- "Render this SPA page: [URL]"
+
+The skill will automatically use the `/render` endpoint to fetch fully rendered content.
+
+### Quick Reference
+
+```bash
+# Skill directory
+~/.claude/skills/fetch-rendered/
+
+# Start server
+npm start
+
+# Stop server
+npm run stop
+
+# Server URL
+http://localhost:3456
+
+# Example API call
+curl -s "http://localhost:3456/render?url=https://example.com&waitTime=5000"
+```
 
 ## Example: Fetch Lark Bot Documentation
 
