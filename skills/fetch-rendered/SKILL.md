@@ -16,20 +16,15 @@ Fetches fully rendered HTML from JavaScript-heavy pages.
 - Content renders client-side (React, Vue, Angular)
 - Need text from modern documentation sites
 
-## Setup
+## Auto-Setup
 
-Install dependencies once:
-```bash
-cd ${CLAUDE_SKILL_DIR}
-npm install
-npx playwright install chromium
-```
+Dependencies are automatically installed on first use. No manual setup required.
 
 ## Usage
 
-### Start Server
+### Start Server (auto-installs if needed)
 ```bash
-cd ${CLAUDE_SKILL_DIR} && node server.js &
+cd ${CLAUDE_SKILL_DIR} && [ ! -d node_modules ] && npm install && npx playwright install chromium; node server.js &
 sleep 3
 ```
 
@@ -62,10 +57,19 @@ pkill -f "node.*server.js"
 Input: `/fetch-rendered https://open.larksuite.com/document/client-docs/bot-v3/add-custom-bot`
 
 ```bash
-cd ${CLAUDE_SKILL_DIR} && node server.js &
+cd ${CLAUDE_SKILL_DIR} && [ ! -d node_modules ] && npm install && npx playwright install chromium; node server.js &
 sleep 3
 curl -s "http://localhost:3456/render?url=https://open.larksuite.com/document/client-docs/bot-v3/add-custom-bot&waitTime=5000" | jq -r '.textContent'
 pkill -f "node.*server.js"
+```
+
+## Manual Setup (if needed)
+
+If automatic installation fails, run manually:
+```bash
+cd ${CLAUDE_SKILL_DIR}
+npm install
+npx playwright install chromium
 ```
 
 ## Errors

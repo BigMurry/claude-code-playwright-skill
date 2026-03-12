@@ -1,36 +1,14 @@
-# Fetch Rendered Page
+# Claude Code Playwright Skill
 
-Claude Code skill for fetching JavaScript-rendered web pages. Use when standard WebFetch can't get content from SPAs.
+Fetch JavaScript-rendered web pages using headless Playwright. Use when standard WebFetch can't get content from SPAs, React/Vue pages, or client-side rendered sites.
 
 ## Install
-
-### Option 1: npx skills add (Recommended)
 
 ```bash
 npx skills add BigMurry/claude-code-playwright-skill
 ```
 
-Then install dependencies:
-```bash
-cd ~/.claude/skills/fetch-rendered
-npm install
-npx playwright install chromium
-```
-
-### Option 2: Git Clone
-
-```bash
-git clone https://github.com/BigMurry/claude-code-playwright-skill.git ~/.claude/skills/fetch-rendered
-cd ~/.claude/skills/fetch-rendered
-npm install
-npx playwright install chromium
-```
-
-### Option 3: Claude Code Plugin (Coming Soon)
-
-```
-/plugin marketplace add BigMurry/claude-code-playwright-skill
-```
+Dependencies are automatically installed on first use.
 
 ## Usage
 
@@ -38,25 +16,23 @@ npx playwright install chromium
 /fetch-rendered https://example.com
 ```
 
-Or manually:
-```bash
-npm start
-curl -s "http://localhost:3456/render?url=<URL>&waitTime=3000"
-```
+## Parameters
 
 | Parameter | Description | Default |
 |-----------|-------------|---------|
 | url | Page to render | required |
 | waitTime | Wait after load (ms) | 3000 |
-| waitFor | CSS selector | - |
+| waitFor | CSS selector to wait for | - |
 | timeout | Page timeout (ms) | 30000 |
 
-## Commands
+## Manual Setup
+
+If automatic installation fails:
 
 ```bash
-npm start      # Start server (port 3456)
-npm run stop   # Stop server
-npm run restart
+cd ~/.claude/skills/fetch-rendered
+npm install
+npx playwright install chromium
 ```
 
 ## Troubleshooting
@@ -67,8 +43,11 @@ lsof -ti:3456 | xargs kill -9   # macOS
 fuser -k 3456/tcp               # Linux
 ```
 
-**Browser error:** `npx playwright install chromium`
+**Browser error:**
+```bash
+npx playwright install chromium
+```
 
----
+## License
 
-For details, see [skills/fetch-rendered/SKILL.md](./skills/fetch-rendered/SKILL.md)
+MIT
