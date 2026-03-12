@@ -7,7 +7,7 @@ Claude Code skill for fetching JavaScript-rendered web pages. Use when standard 
 ### Option 1: npx skills add (Recommended)
 
 ```bash
-npx skills add YOUR_USERNAME/claude-code-playwright-skill
+npx skills add BigMurry/claude-code-playwright-skill
 ```
 
 Then install dependencies:
@@ -20,7 +20,7 @@ npx playwright install chromium
 ### Option 2: Git Clone
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/claude-code-playwright-skill.git ~/.claude/skills/fetch-rendered
+git clone https://github.com/BigMurry/claude-code-playwright-skill.git ~/.claude/skills/fetch-rendered
 cd ~/.claude/skills/fetch-rendered
 npm install
 npx playwright install chromium
@@ -29,7 +29,7 @@ npx playwright install chromium
 ### Option 3: Claude Code Plugin (Coming Soon)
 
 ```
-/plugin marketplace add YOUR_USERNAME/claude-code-playwright-skill
+/plugin marketplace add BigMurry/claude-code-playwright-skill
 ```
 
 ## Usage
