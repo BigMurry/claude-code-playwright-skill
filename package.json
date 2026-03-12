@@ -1,0 +1,41 @@
+{
+  "name": "claude-code-playwright-skill",
+  "version": "1.0.0",
+  "description": "Claude Code skill for fetching JavaScript-rendered web pages using headless Playwright",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_USERNAME/claude-code-playwright-skill.git"
+  },
+  "homepage": "https://github.com/YOUR_USERNAME/claude-code-playwright-skill#readme",
+  "bugs": {
+    "url": "https://github.com/YOUR_USERNAME/claude-code-playwright-skill/issues"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "stop": "lsof -ti:3456 | xargs kill -9 2>/dev/null || fuser -k 3456/tcp 2>/dev/null || pkill -f 'node.*server.js' 2>/dev/null || echo 'No server to stop'",
+    "restart": "npm run stop && npm start",
+    "install": "npm install && npx playwright install chromium",
+    "install-browsers": "npx playwright install chromium",
+    "test": "node server.js & sleep 3 && curl -s 'http://localhost:3456/render?url=https://example.com' && kill %1"
+  },
+  "keywords": [
+    "claude-code",
+    "skill",
+    "playwright",
+    "web-scraping",
+    "headless",
+    "spa",
+    "javascript-rendering"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "playwright": "^1.40.0"
+  }
+}
