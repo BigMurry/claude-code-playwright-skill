@@ -2,40 +2,34 @@
 
 Claude Code skill for fetching JavaScript-rendered web pages. Use when standard WebFetch can't get content from SPAs.
 
-## Quick Install
+## Install
 
-### Claude Code
+### Option 1: npx skills add (Recommended)
 
 ```bash
-# Clone to your skills folder
-git clone https://github.com/YOUR_USERNAME/claude-code-playwright-skill.git ~/.claude/skills/fetch-rendered
+npx skills add YOUR_USERNAME/claude-code-playwright-skill
+```
 
-# Install dependencies
+Then install dependencies:
+```bash
 cd ~/.claude/skills/fetch-rendered
 npm install
 npx playwright install chromium
 ```
 
-Then start the server: `npm start`
-
-### Other Agents (Codex, Gemini CLI, OpenClaude, etc.)
-
-This skill uses a simple HTTP server pattern - it should work with any agent that can run bash commands and make HTTP requests.
+### Option 2: Git Clone
 
 ```bash
-# Clone anywhere
-git clone https://github.com/YOUR_USERNAME/claude-code-playwright-skill.git
-
-# Install
-cd claude-code-playwright-skill
+git clone https://github.com/YOUR_USERNAME/claude-code-playwright-skill.git ~/.claude/skills/fetch-rendered
+cd ~/.claude/skills/fetch-rendered
 npm install
 npx playwright install chromium
+```
 
-# Start server
-npm start
+### Option 3: Claude Code Plugin (Coming Soon)
 
-# Use via curl
-curl -s "http://localhost:3456/render?url=https://example.com&waitTime=3000"
+```
+/plugin marketplace add YOUR_USERNAME/claude-code-playwright-skill
 ```
 
 ## Usage
@@ -46,6 +40,7 @@ curl -s "http://localhost:3456/render?url=https://example.com&waitTime=3000"
 
 Or manually:
 ```bash
+npm start
 curl -s "http://localhost:3456/render?url=<URL>&waitTime=3000"
 ```
 
@@ -76,4 +71,4 @@ fuser -k 3456/tcp               # Linux
 
 ---
 
-For details, see [SKILL.md](./SKILL.md)
+For details, see [skills/fetch-rendered/SKILL.md](./skills/fetch-rendered/SKILL.md)

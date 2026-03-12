@@ -1,7 +1,7 @@
 ---
 name: fetch-rendered
 description: Fetch JavaScript-rendered web pages. Use when WebFetch fails to get content from SPAs, React/Vue pages, or client-side rendered sites.
-disable-model-invocation: false
+compatibility: Requires Node.js, npm, and Playwright. Runs a local server on port 3456.
 allowed-tools: Bash, Read
 ---
 
