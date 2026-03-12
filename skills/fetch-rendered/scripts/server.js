@@ -24,13 +24,17 @@ async function initBrowser() {
 }
 
 // Cleanup on shutdown
-process.on('SIGINT', async () => {
+async function cleanup() {
   console.log('Shutting down...');
   if (browser) {
     await browser.close();
+    browser = null;
   }
   process.exit(0);
-});
+}
+
+process.on('SIGINT', cleanup);
+process.on('SIGTERM', cleanup);
 
 // Health check endpoint
 app.get('/health', async (req, res) => {
@@ -62,7 +66,8 @@ app.get('/render', async (req, res) => {
   try {
     playwrightBrowser = await initBrowser();
     const context = await playwrightBrowser.newContext({
-      userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
+      userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+      viewport: { width: 1280, height: 720 }
     });
     const page = await context.newPage();
 

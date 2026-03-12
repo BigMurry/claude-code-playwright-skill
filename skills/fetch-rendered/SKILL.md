@@ -1,8 +1,12 @@
 ---
 name: fetch-rendered
 description: Fetch JavaScript-rendered web pages. Use when WebFetch fails to get content from SPAs, React/Vue pages, or client-side rendered sites.
-compatibility: Requires Node.js, npm, and Playwright. Runs a local server on port 3456.
+license: MIT
+compatibility: Requires Node.js 18+ and Playwright. Runs a local server on port 3456.
 allowed-tools: Bash, Read
+metadata:
+  author: ""
+  version: 1.0.0
 ---
 
 # Fetch Rendered Page
@@ -24,7 +28,7 @@ Dependencies are automatically installed on first use. No manual setup required.
 
 ### Start Server (auto-installs if needed)
 ```bash
-cd ${CLAUDE_SKILL_DIR} && [ ! -d node_modules ] && npm install && npx playwright install chromium; node server.js &
+cd ${CLAUDE_SKILL_DIR} && [ ! -d node_modules ] && npm install && npx playwright install chromium; node scripts/server.js &
 sleep 3
 ```
 
@@ -43,21 +47,28 @@ curl -s "http://localhost:3456/render?url=$ARGUMENTS" | jq -r '.textContent'
 pkill -f "node.*server.js"
 ```
 
+## API Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/health` | GET | Health check endpoint |
+| `/render` | GET | Render a URL and return HTML/text |
+
 ## Parameters
 
 | Param | Description | Default |
 |-------|-------------|---------|
-| url | Target URL | required |
-| waitTime | Wait after load (ms) | 3000 |
-| waitFor | CSS selector to wait for | - |
-| timeout | Page timeout (ms) | 30000 |
+| url | Target URL to render | required |
+| waitTime | Milliseconds to wait after page load for JS rendering | 3000 |
+| waitFor | CSS selector to wait for before capturing content | - |
+| timeout | Page navigation timeout in milliseconds | 30000 |
 
 ## Example
 
 Input: `/fetch-rendered https://open.larksuite.com/document/client-docs/bot-v3/add-custom-bot`
 
 ```bash
-cd ${CLAUDE_SKILL_DIR} && [ ! -d node_modules ] && npm install && npx playwright install chromium; node server.js &
+cd ${CLAUDE_SKILL_DIR} && [ ! -d node_modules ] && npm install && npx playwright install chromium; node scripts/server.js &
 sleep 3
 curl -s "http://localhost:3456/render?url=https://open.larksuite.com/document/client-docs/bot-v3/add-custom-bot&waitTime=5000" | jq -r '.textContent'
 pkill -f "node.*server.js"
